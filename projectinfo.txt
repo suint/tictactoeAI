@@ -1,0 +1,44 @@
+
+War Games
+
+ 
+
+Note:  You may work on this project individually or in pairs.  No groups of more than 2 people will be allowed.  It is your choice if you want to go it alone.  If you can’t find a partner, let me know and I will try to match you up.
+
+Overview:  In this lab you will actually develop something (marginally) useful.  We will be writing a Tic-Tac-Toe game with some basic AI.  You will develop a main program, and a data structure to hold the game data.  The AI should TRY TO WIN. 
+
+Details:  In any standard deterministic 2 player game, it is possible to plot out every move to determine the best course of action to achieve victory.  In games like Chess, the number of combinations is far too large to lay out the entire game, but for Tic, Tac, Toe, it is not, and in fact there are 9!+1 states including the empty board.  In practice you would never pre-compute the entire game tree, but for the purposes of this project we will.
+
+For the AI portion of the program, we will use the idea of min-max trees.  Basically, each player wants to win.  If the computer denotes a winning state as having a score of -1, and the player denotes a winning state as having a score of +1, the goal of the AI is to minimize the score.  Each player moves in turn, so if the user is the first player, the first set of pre-calculated moves, should be the maximum score of its children.  Likewise, the second level of the tree would compute each node (state) score based on the minimum of its children alternating to the leaves.  Leaves either have a score of -1 or +1 or 0 depending on if that end game is a win, a loss or a tie.  Once you build a min-max tree that contains every possible move in the game, and score it in this alternating fashion, the computer can always take the node with the minimum score as the best node for a win.  These scores can be calculated recursively while building the tree.  This tree will be a tree of all possible states in the game, scored using the minmax algorithm.
+
+How To Proceed:
+
+1)      First, create a class for a GameState which stores the current board (in an array of size 9) and the children (also in an array of size nine).  You can use 0 to represent an empty square, 1 to represent the player’s moves, and 2 to represent the computer’s moves.  Ignore scoring and AI for now. 
+
+2)      The first player (ok to hard code, but better if selectable) will create 9 full nodes basically setting the board in each of those nodes to have the correct element populated.  The system should then recurse down until a start stop state is found.  There are basically 3 stop states.  The user wins, the computer wins, or there is a tie.  This will represent a tree of possible states.
+
+3)      Create a function to execute a move for a given player.  To do this, simply find the child that matches the move, and return it to the game class.
+
+4)      Create a function to determine the score of the current node.
+
+5)      Create a function to display the current board.
+
+6)      Create a game class which has a pointer to the current node in the tree.  Initially this will be the root which has a board with nothing filled in.  Create a method to initiate a move which gets the appropriate child of the current node and then updates current node.
+
+7)      Write a main program that gets user input and prints out a tic-tac-toe board.  Set this up so you can play against yourself to make sure everything is working.
+
+8)      Modify your initial creation routine (tree builder) to capture the score in each node recursively (i.e. leaves have scores which propogate up to the parent alternating min then max or max then min depending on who started first.
+
+9)      Write an auto-select which looks for the child with the smallest score, and then automatically calls the move routine
+
+10)   Modify your main program to call the auto-select function every other time.
+
+Note: This is not an easy project, and it is not intended to be.  By an experienced programmer, this can be completed in a few hours, but I expect it will take you substantially longer.  DO NOT WAIT UNTIL the week before it is due.  It can be done in about 300 lines, but that does not mean it is easy.
+
+ 
+
+ 
+
+Min-Max Tree Example
+
+In this example a win is +10 for the User and -10 for the computer.  Here the computer would choose either of these because they both move to a win.  Remember we are alternating, so to calculate the score for the top nodes here we are looking for the minimum of the scores.  For the second level, we are looking at the maximum of the children, so the maximum of level 3 is +10, but the minimum of level 2 is -10 in both cases.  So if we were storing scores in each node, the leaf nodes have defined scores based on win lose or draw.  The Middle level has 2 intermediate nodes where we would be taking the maximum so they would be in order (-10,10,-10,10).  The top nodes would then take minimum of the child scores which would be (-10, -10).  This tells us that choosing either the left or right move in the top row, produces the same outcome.  VICTORY!  Each level is a different user trying to win. If it is the user’s move, then the user will try to maximize the score, and we assume this by using the maximum on that level.  If it is the computer’s move, the computer is trying to minimize the score as a computer win is -10.
