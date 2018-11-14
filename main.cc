@@ -13,10 +13,9 @@
 using namespace std;
 
 #include "GameState.hpp"
+#include "GameTree.hpp"
 
 int main(int argc, char** argv){
-	cout << "test" << endl;
-	cout << "test2 nyeeeh" << endl;
 
 	GameState Game = GameState();
 	Game.printGameState();

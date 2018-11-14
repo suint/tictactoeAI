@@ -23,6 +23,15 @@ class GameState{
 		int value;
 		GameState **child = new GameState*[9]; //array of gamestate pointers, view gamestate as a node
 
+		GameState(int v, int * arr){ //this is EXTREMELY awkward... using 9 variables does ensure that the board is the right size, but at what cost?
+									 //so i moved this to private since the only case where you would make a gamestate that is not empty would be when you are generating the min/max tree
+					board = arr;
+					for (int i = 0; i < boardsize; i++){
+				        child[i] = nullptr;
+					}
+					value = v;
+		}
+
 	public:
 		GameState(){
 			board = new int[boardsize];
@@ -33,23 +42,14 @@ class GameState{
 			value = 0;
 		}
 
-		GameState(int v, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8){
-					board = new int[boardsize];
-					board[0] = v0; board[1] = v1; board[2] = v2;
-					board[3] = v3; board[4] = v4; board[5] = v5;
-					board[6] = v6; board[7] = v7; board[8] = v8;
-					for (int i = 0; i < boardsize; i++){
-				        child[i] = nullptr;
-					}
-					value = v;
-		}
-
 		~GameState(){
 			delete[] board;
 			//delete nodes in children
 		}
 
-		//inserts a GameState at next null node with it's board as otherboard with altered value at board[index]
+
+
+		//inserts a GameState at next null node with its board as otherboard with altered value at board[index]
 		void insertState(int index, int value, int* otherboard){
 					for (int i = 0; i < boardsize; i++){
 						if(child[i] == nullptr ){//&& otherboard[index] == 0){
@@ -68,7 +68,7 @@ class GameState{
 			cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl <<endl;
 		}
 
-		//maybe for comparing moves / boards? idkkk
+		//maybe for comparing moves / boards? idkkk //why?
 		bool boardEqual(int* otherboard){
 			bool flag = true;
 			int i = 0;
@@ -97,7 +97,7 @@ class GameState{
 			} return r;
 		}
 
-		bool isTerminalState(){
+		bool isTerminalState(){ //i would recommend changing this to return which player won (0, 1, 2)
 			if((board[0] != 0 && board[0]==board[1] && board[1] == board[2]) ||
 			  (board[3] != 0 && board[3]==board[4] && board[4] == board[5])	||
 			  (board[6] != 0 && board[6]==board[7] && board[7] == board[8]) ||
@@ -126,59 +126,6 @@ class GameState{
 
 		friend class GameTree;
 };
-
-class GameTree{
-	private:
-		GameState* root;
-
-	public:
-	GameTree(){
-		root = new GameState();
-	}
-	~GameTree(){
-
-	}
-
-	//only printing children of root for now, get it to work later
-	void printTree(){
-		cout << "Root" << endl;
-		root->printGameState();
-
-		cout << "Children" << endl;
-		for(int i = 0; i < 9; i++ ){
-			root->child[i]->printGameState();
-		}
-
-		cout << "Children, children" << endl;
-		for(int i = 0; i<9; i++){
-				for(int j = 0; j < 9; j++){
-					root->child[i]->child[j]->printGameState();
-				}
-			}
-	}
-
-	void insertState(int index, int value){
-		root->insertState(index,value, root->board);
-	}
-	//if child of root, insert board with 100, 010, 001,.. 1 in every position
-
-	//doesn't totally work yet
-	void insertChildren(){
-		for(int i = 0; i < 9; i++){
-			root->insertState(i, 1, root->board);
-		}
-		for(int i = 0; i<9; i++){
-			for(int j = 0; j < 9; j++){
-					if(root->child[i] != nullptr){
-						root->child[i]->insertState(j,2,root->child[i]->board);
-					}
-			}
-		}
-	}
-
-
-};
-
 
 
 #endif /* GAMESTATE_HPP_ */
