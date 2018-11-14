@@ -5,8 +5,8 @@
  *      Author: kelly
  */
 
-#ifndef TTTLIST_HPP_
-#define TTTLIST_HPP_
+#ifndef GameTree_HPP_
+#define GameTree_HPP_
 
 #include "GameState.hpp"
 
@@ -64,4 +64,4 @@ class GameTree{
 
 
 
-#endif /* TTTLIST_HPP_ */
+#endif /* GAMELIST_HPP_ */
