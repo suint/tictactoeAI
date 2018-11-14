@@ -47,7 +47,13 @@ class GameState{
 			//delete nodes in children
 		}
 
+		bool isEmpty(int index){
+			return !(board[index]);
+		}
 
+		void addChild(int index, int player, GameState * stem){
+
+		}
 
 		//inserts a GameState at next null node with its board as otherboard with altered value at board[index]
 		void insertState(int index, int value, int* otherboard){

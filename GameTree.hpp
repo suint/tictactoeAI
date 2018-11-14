@@ -39,9 +39,30 @@ class GameTree{
 
 	void insertRecursiveChildren(GameState * root, int player){
 		for (int i = 0; i < 9; i++){
-			//ill work on this lol
+			if (root->isEmpty(i)){
+				root->insertState(i,player,root->board);
+				insertRecursiveChildren(root->child[i], nextPlayer(player));
+			}
+			//write function to find if a space in the board is empty
+			//if yes, insert child for the space
+			//recursively run this function on that child
+			//if no, end
 		}
 	}
+
+
+
+	int nextPlayer(int p){
+		return (p == 1) ? 2 : 1; //return 2 if p1 else return 1
+	}
+
+
+
+
+
+
+
+
 
 	//doesn't totally work yet
 	void insertChildren(){
