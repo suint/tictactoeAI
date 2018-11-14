@@ -18,15 +18,16 @@ using namespace std;
 
 class GameState{
 	private:
-		int* board;
-		int boardsize = 9;
+		int board [9];
 		int value;
 		GameState **child = new GameState*[9]; //array of gamestate pointers, view gamestate as a node
 
-		GameState(int v, int * arr){ //this is EXTREMELY awkward... using 9 variables does ensure that the board is the right size, but at what cost?
+		GameState(int v, int arr[9]){ //this is EXTREMELY awkward... using 9 variables does ensure that the board is the right size, but at what cost?
 									 //so i moved this to private since the only case where you would make a gamestate that is not empty would be when you are generating the min/max tree
-					board = arr;
-					for (int i = 0; i < boardsize; i++){
+					for(int i = 0; i < 9; i++){
+							board[i] = arr[i];
+						}
+					for (int i = 0; i < 9; i++){
 				        child[i] = nullptr;
 					}
 					value = v;
@@ -34,8 +35,7 @@ class GameState{
 
 	public:
 		GameState(){
-			board = new int[boardsize];
-			for (int i = 0; i < boardsize; i++){
+			for (int i = 0; i < 9; i++){
 				board[i] = 0;
 		        child[i] = nullptr;
 			}
@@ -43,8 +43,7 @@ class GameState{
 		}
 
 		~GameState(){
-			delete[] board;
-			//delete nodes in children
+			//delete nodes in children recursively
 		}
 
 		bool isEmpty(int index){
@@ -56,12 +55,12 @@ class GameState{
 		}
 
 		//inserts a GameState at next null node with its board as otherboard with altered value at board[index]
-		void insertState(int index, int value, int* otherboard){
-					for (int i = 0; i < boardsize; i++){
+		void insertState(int index, int value, int otherboard[9]){
+					for (int i = 0; i < 9; i++){
 						if(child[i] == nullptr ){//&& otherboard[index] == 0){
 							child[i] = new GameState();
 							child[i]->copyBoard(otherboard); //probably sets child board to point to otherboard? , change one change the other
-							if(otherboard[index] == 0){ //if board spot empty, set
+							if(otherboard[index] == 0){
 								child[i]->board[index] = value;
 							}return;
 						}
@@ -75,10 +74,10 @@ class GameState{
 		}
 
 		//maybe for comparing moves / boards? idkkk //why?
-		bool boardEqual(int* otherboard){
+		bool boardEqual(int otherboard[9]){
 			bool flag = true;
 			int i = 0;
-			while(i < boardsize && flag == true){
+			while(i < 9 && flag == true){
 				if(board[i] != otherboard[i]){
 					flag = false;
 				}
@@ -87,7 +86,7 @@ class GameState{
 		}
 
 		bool isBoardFull(){
-			for(int i = 0; i < boardsize; i++){
+			for(int i = 0; i < 9; i++){
 				if(board[i] == 0){
 					return false;
 				}
@@ -96,7 +95,7 @@ class GameState{
 
 		int openSpaces(){
 			int r = 0;
-			for(int i = 0; i < boardsize; i++){
+			for(int i = 0; i < 9; i++){
 				if(board[i] == 0){
 					r++;
 				}
@@ -114,11 +113,17 @@ class GameState{
 			} return false;
 		}
 
+		bool horizontalEnd(){
+			for(int i = 0; i < 2; i++){
+				if(board[i] && board[1+i] && board[2+i]) return true;
+			}
+		}
+
 		void setBoard(int index, int value){
 			board[index] = value;
 		}
-		void copyBoard(int* otherboard){
-			for(int i = 0; i < boardsize; i++){
+		void copyBoard(int otherboard[9]){
+			for(int i = 0; i < 9; i++){
 				board[i] = otherboard[i];
 			}
 		}
