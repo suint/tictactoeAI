@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 
 	GameTree tree = GameTree();
 	tree.insertChildren();
-	tree.printTree();
+	tree.printTree(0);
 
 
 
