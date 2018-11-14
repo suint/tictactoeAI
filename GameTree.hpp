@@ -12,8 +12,6 @@
 
 using namespace std;
 
-
-
 class GameTree{
 	private:
 		GameState* root;
