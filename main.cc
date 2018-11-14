@@ -19,11 +19,17 @@ int main(int argc, char** argv){
 	cout << "test2 nyeeeh" << endl;
 
 	GameState Game = GameState();
-	Game.PrintGameState();
-	Game.SetBoard(1,0,2,1,1,2,1,2,1);
-	Game.PrintGameState();
+	Game.printGameState();
+	Game.setBoard(1,0,2,1,1,2,1,2,1);
+	Game.printGameState();
 	cout << Game.isBoardFull() << endl;
 	cout << Game.isTerminalState() << endl;
+	cout << "-----------------------------" <<endl;
+
+	GameTree tree = GameTree();
+	tree.insertChildren();
+	tree.printTree();
+
 
 
 	return 0;

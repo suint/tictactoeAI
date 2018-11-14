@@ -21,29 +21,55 @@ class GameState{
 		int* board;
 		int boardsize = 9;
 		int value;
-		GameState **children = new GameState*[9]; //array of gamestate pointers, view gamestate as a node
+		GameState **child = new GameState*[9]; //array of gamestate pointers, view gamestate as a node
 
 	public:
 		GameState(){
 			board = new int[boardsize];
 			for (int i = 0; i < boardsize; i++){
 				board[i] = 0;
+		        child[i] = nullptr;
 			}
 			value = 0;
 		}
 
-		~GameState(){
-			delete[] board;
+		GameState(int v, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8){
+					board = new int[boardsize];
+					board[0] = v0; board[1] = v1; board[2] = v2;
+					board[3] = v3; board[4] = v4; board[5] = v5;
+					board[6] = v6; board[7] = v7; board[8] = v8;
+					for (int i = 0; i < boardsize; i++){
+				        child[i] = nullptr;
+					}
+					value = v;
 		}
 
-		void PrintGameState(){
+		~GameState(){
+			delete[] board;
+			//delete nodes in children
+		}
+
+		//inserts a GameState at next null node with it's board as otherboard with altered value at board[index]
+		void insertState(int index, int value, int* otherboard){
+					for (int i = 0; i < boardsize; i++){
+						if(child[i] == nullptr ){//&& otherboard[index] == 0){
+							child[i] = new GameState();
+							child[i]->copyBoard(otherboard); //probably sets child board to point to otherboard? , change one change the other
+							if(otherboard[index] == 0){ //if board spot empty, set
+								child[i]->board[index] = value;
+							}return;
+						}
+					}
+				}
+
+		void printGameState(){
 			cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
 			cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
 			cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl <<endl;
 		}
 
 		//maybe for comparing moves / boards? idkkk
-		bool BoardEqual(int* otherboard){
+		bool boardEqual(int* otherboard){
 			bool flag = true;
 			int i = 0;
 			while(i < boardsize && flag == true){
@@ -82,17 +108,73 @@ class GameState{
 			} return false;
 		}
 
-		void SetBoard(int index, int value){
+		void setBoard(int index, int value){
 			board[index] = value;
+		}
+		void copyBoard(int* otherboard){
+			for(int i = 0; i < boardsize; i++){
+				board[i] = otherboard[i];
+			}
 		}
 
 		//for testing
-		void SetBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8){
+		void setBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8){
 					board[0] = v0; board[1] = v1; board[2] = v2;
 					board[3] = v3; board[4] = v4; board[5] = v5;
 					board[6] = v6; board[7] = v7; board[8] = v8;
 			}
 
+		friend class GameTree;
+};
+
+class GameTree{
+	private:
+		GameState* root;
+
+	public:
+	GameTree(){
+		root = new GameState();
+	}
+	~GameTree(){
+
+	}
+
+	//only printing children of root for now, get it to work later
+	void printTree(){
+		cout << "Root" << endl;
+		root->printGameState();
+
+		cout << "Children" << endl;
+		for(int i = 0; i < 9; i++ ){
+			root->child[i]->printGameState();
+		}
+
+		cout << "Children, children" << endl;
+		for(int i = 0; i<9; i++){
+				for(int j = 0; j < 9; j++){
+					root->child[i]->child[j]->printGameState();
+				}
+			}
+	}
+
+	void insertState(int index, int value){
+		root->insertState(index,value, root->board);
+	}
+	//if child of root, insert board with 100, 010, 001,.. 1 in every position
+
+	//doesn't totally work yet
+	void insertChildren(){
+		for(int i = 0; i < 9; i++){
+			root->insertState(i, 1, root->board);
+		}
+		for(int i = 0; i<9; i++){
+			for(int j = 0; j < 9; j++){
+					if(root->child[i] != nullptr){
+						root->child[i]->insertState(j,2,root->child[i]->board);
+					}
+			}
+		}
+	}
 
 
 };
