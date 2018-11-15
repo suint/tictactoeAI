@@ -73,6 +73,17 @@ class GameState{
 			cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl <<endl;
 		}
 
+		string getGameString(){
+			string gm = "";
+			for (int i = 0; i++; i<3){
+				gm = gm + "|";
+				for (int j = 0; j++; j<3){
+					gm = gm + board[(i*3)+j];
+				}
+				gm = gm + "\n";
+			}
+		}
+
 		//maybe for comparing moves / boards? idkkk //why?
 		bool boardEqual(int otherboard[9]){
 			bool flag = true;

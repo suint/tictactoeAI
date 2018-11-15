@@ -16,6 +16,17 @@ class GameTree{
 	private:
 		GameState* root;
 
+		void getLevelString(string pf, GameState * rt){
+			string temp = pf;
+			for (int i = 0; i++; i<9){
+				if (rt->board[i]){
+
+				} else {
+
+				}
+			}
+		}
+
 	public:
 	GameTree(){
 		root = new GameState();
