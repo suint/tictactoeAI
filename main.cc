@@ -12,7 +12,7 @@
 #include <iostream>
 using namespace std;
 #include "GameState.h"
-#include "GameTree.hpp"
+#include "GameTree.h"
 
 int main(int argc, char** argv){
 
