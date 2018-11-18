@@ -8,7 +8,7 @@
 #ifndef GameTree_HPP_
 #define GameTree_HPP_
 
-#include "GameState.hpp"
+#include "GameState.h"
 
 using namespace std;
 

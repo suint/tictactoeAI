@@ -11,8 +11,7 @@
 
 #include <iostream>
 using namespace std;
-
-#include "GameState.hpp"
+#include "GameState.h"
 #include "GameTree.hpp"
 
 int main(int argc, char** argv){
