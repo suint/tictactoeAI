@@ -9,15 +9,14 @@
 #include <iostream>
 #include "GameState.h"
 
-GameState::GameState(int v, int arr[9]){ //this is EXTREMELY awkward... using 9 variables does ensure that the board is the right size, but at what cost?
-							 //so i moved this to private since the only case where you would make a gamestate that is not empty would be when you are generating the min/max tree
-			for(int i = 0; i < 9; i++){
+GameState::GameState(int v, int arr[9]){
+		for(int i = 0; i < 9; i++){
 					board[i] = arr[i];
-				}
-			for (int i = 0; i < 9; i++){
-				child[i] = nullptr;
-			}
-			value = v;
+		}
+		for (int i = 0; i < 9; i++){
+			child[i] = nullptr;
+		}
+		value = v;
 }
 
 GameState::GameState(){
@@ -100,24 +99,21 @@ int GameState::openSpaces(){
 	} return r;
 }
 
-bool GameState::isTerminalState(){ //i would recommend changing this to return which player won (0, 1, 2)
-	if((board[0] != 0 && board[0]==board[1] && board[1] == board[2]) ||
-	  (board[3] != 0 && board[3]==board[4] && board[4] == board[5])	||
-	  (board[6] != 0 && board[6]==board[7] && board[7] == board[8]) ||
-	  (board[0] != 0 && board[0]==board[4] && board[4] == board[8]) ||
-	  (board[2] != 0 && board[2]==board[4] && board[4] == board[6]) ||
-	   this->isBoardFull() ){
-		return true;
-	} return false;
-}
-
-bool GameState::horizontalEnd(){
+//returns player # if player wins, 0 if tie, -1 if no winner
+int GameState::isTerminalState(){
 	for(int i = 0; i < 2; i++){
-		if (board[i] && board[1+i] && board[2+i]){
-			return true;
+		if( (board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3]) ||
+			(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i]) ){
+				return board[i];
 		}
 	}
-	return false;
+	if((board[4] != 0 && board[0] == board[4] && board[4] == board[8])||
+	   (board[4] != 0 && board[2] == board[4] && board[4] == board[6])){
+			return board[4];
+	}else if (isBoardFull()){
+		return 0;
+	}else
+		return -1;
 }
 
 void GameState::setBoard(int index, int value){

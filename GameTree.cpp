@@ -10,7 +10,7 @@
 
 void GameTree::getLevelString(string pf, GameState * rt){
 			string temp = pf;
-			for (int i = 0; i++; i<9){
+			for (int i = 0; i<9; i++){
 				if (rt->board[i]){
 
 				} else {
