@@ -22,6 +22,8 @@ void Game::startGame(){
 	cout << "|0|1|2|"<<endl << "|3|4|5|" <<endl <<"|6|7|8|"<<endl;
 	makeMove();
 }
+
+//between 2 players, need check if player2 then make ai move, -1 restarts game
 void Game::makeMove(){
 	int index;
 	cout << "Player "<< player <<"'s turn:"<<endl;
@@ -29,20 +31,44 @@ void Game::makeMove(){
 	if(index >= 0 && index <= 8){
 		if(!pointer->isSpaceEmpty(index) ){
 			cout << "Space full" <<endl;
+			pointer->printGameState();
 			makeMove();
 		}else{ //make move, update pointer, update player, etc...
 			cout<< "Chose space " << index << endl;
 			pointer = pointer->child[index];
+			changePlayer();
 			if( pointer->isTerminalState() != -1){
 				pointer->printGameState();
-				cout << "Game won" <<endl;
+				cout << "Player " << pointer->isTerminalState() << " wins!!!" <<endl;
 			}else{
 				pointer->printGameState();
 				makeMove();
 			}
 		}
+	}else if(index == -1){
+		restartGame();	//for testing
 	}else{
 		cout << "Invalid move" << endl;
 		makeMove();
 	}
 }
+
+void Game::changePlayer(){
+	if(player == 1){
+		player = 2;
+	}else
+		player = 1;
+}
+
+void Game::restartGame(){
+	pointer = tree.root;
+	player = 1;
+	startGame();
+}
+
+void Game::aiMove(){
+	//go through children of current pointer
+	//find index of one w/ largest min-max value
+	//set pointer to that child
+}
+

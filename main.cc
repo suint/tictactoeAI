@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 
 	GameState state = GameState();
 	state.printGameState();
-	state.setBoard(1,0,2,1,2,0,1,0,2);
+	state.setBoard(0,2,0,1,2,2,1,2,2);
 	state.printGameState();
 	cout << state.isBoardFull() << endl;
 	cout << state.isTerminalState() << endl;
