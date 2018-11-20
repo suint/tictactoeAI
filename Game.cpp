@@ -36,11 +36,21 @@ void Game::makeMove(){
 		}else{ //make move, update pointer, update player, etc...
 			cout<< "Chose space " << index << endl;
 			pointer = pointer->child[index];
+			cout << "sgsdfgdfG"<< endl;
 			changePlayer();
-			if( pointer->isTerminalState() != -1){
+			if (pointer->isOver()){
+				cout <<"end found" <<endl;
 				pointer->printGameState();
-				cout << "Player " << pointer->isTerminalState() << " wins!!!" <<endl;
-			}else{
+				int a = pointer->findWinner();
+				if (a == 0){
+					cout << "tie" << endl;
+				} else if (a == 1){
+					cout << "p1 wins" << endl;
+				} else {
+					cout << "p2 wins" << endl;
+				}
+			} else {
+				cout << "no end found"<< endl;
 				pointer->printGameState();
 				makeMove();
 			}

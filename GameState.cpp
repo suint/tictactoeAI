@@ -94,14 +94,20 @@ int GameState::isTerminalState(){
 }
 
 bool GameState::isOver(){
-	return (this->numChildren() == 0 || this->findWinner() != 0); // find if leaf node or win found
+	if (this->openSpaces() == 0 || this->findWinner() != 0){
+		std::cout << "wersgfvdfv" << std::endl;
+	} else {
+		cout << "dfgsdf" << endl;
+	}
+	return (this->openSpaces() == 0 || this->findWinner() != 0); // find if full or win found
 }
 
 //0 if no win found, -1 if player 2 won, 1 if player 1 won
 int GameState::findWinner(){
-	if (this->findDiagWin(2) == -1 || this->findHorizWin(2) == -1 || this->findVertWin(2) == -1){ //find if p2 won
+	std::cout << "aa"<<endl;
+	if (this->findDiagWin(2) || this->findHorizWin(2) || this->findVertWin(2)){ //find if p2 won
 		return -1;
-	} else if (this->findDiagWin(1) == 1 || this->findHorizWin(1) == 1 || this->findVertWin(1) == 1){ //find if p1
+	} else if (this->findDiagWin(1) || this->findHorizWin(1) || this->findVertWin(1)){ //find if p1
 		return 1;
 	} else {
 		return 0; //tie
@@ -114,9 +120,9 @@ bool GameState::findDiagWin(int p){
 
 bool GameState::findHorizWin(int p){
 	bool win = false;
-	for (int i = 0; i++; i<3){
+	for (int i = 0; i<3; i++){
 		win = true;
-		for (int j = 0; j++; j<3){
+		for (int j = 0; j<3; j++){
 			if (board[i+j] != p){
 				win = false;
 			}
@@ -129,7 +135,19 @@ bool GameState::findHorizWin(int p){
 }
 
 bool GameState::findVertWin(int p){
-
+	bool win = false;
+	for (int i = 0; i<3; i++){
+		win = true;
+		for (int j = 0; j<3; j++){
+			if (board[i+(3*j)] != p){
+				win = false;
+			}
+		}
+		if (win){
+			return win;
+		}
+	}
+	return false;
 }
 
 void GameState::setBoard(int index, int value){
