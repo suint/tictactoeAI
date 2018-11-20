@@ -125,7 +125,18 @@ bool GameState::findDiagWin(int p){
 
 bool GameState::findHorizWin(int p){
 	bool win = false;
-	return win;
+	for (int i = 0; i++; i<3){
+		win = true;
+		for (int j = 0; j++; j<3){
+			if (board[i+j] != p){
+				win = false;
+			}
+		}
+		if (win){
+			return win;
+		}
+	}
+	return false;
 }
 
 bool GameState::findVertWin(int p){
