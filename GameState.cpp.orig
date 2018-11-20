@@ -83,17 +83,21 @@ int GameState::openSpaces(){
 	for(int i = 0; i < 9; i++){
 		if(board[i] == 0){
 			r++;
-		return r;
+		}
+	} return r;
 }
 
 //returns player # if player wins, 0 if tie, -1 if no winner
 int GameState::isTerminalState(){
 	for(int i = 0; i < 3; i++){
+<<<<<<< HEAD
 		if( board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3] ){
 				return board[i*3];
 		}else if(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i] ){
+=======
 		if( (board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3]) ||
 			(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i]) ){
+>>>>>>> 567f19bd834c78483b4b38ccec1afd9b18e7de05
 				return board[i];
 		}
 	}
@@ -127,18 +131,7 @@ bool GameState::findDiagWin(int p){
 
 bool GameState::findHorizWin(int p){
 	bool win = false;
-	for (int i = 0; i++; i<3){
-		win = true;
-		for (int j = 0; j++; j<3){
-			if (board[i+j] != p){
-				win = false;
-			}
-		}
-		if (win){
-			return win;
-		}
-	}
-	return false;
+	return win;
 }
 
 bool GameState::findVertWin(int p){

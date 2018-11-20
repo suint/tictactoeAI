@@ -9,7 +9,6 @@
 #define TICTACTOEAI_GAME_H_
 
 #include "GameTree.h"
-//using namespace std;
 
 class Game{
 private:
@@ -22,6 +21,9 @@ public:
 	~Game();
 	void startGame();
 	void makeMove();
+	void changePlayer();
+	void restartGame();
+	void aiMove();
 
 };
 
