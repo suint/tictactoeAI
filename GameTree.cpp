@@ -26,12 +26,12 @@ GameTree::~GameTree(){
 
 }
 
-//prints tree recursively now, work on formatting print later
+//maybe works now??, work on formatting print later
 void GameTree::printTree(GameState * current){
 	cout << "level" << endl;
+	current->printGameState();
 	for(int i  = 0; i < 9; i++){
 		if(current->child[i] != nullptr){
-			current->child[i]->printGameState();
 			printTree(current->child[i]);
 		}
 	}

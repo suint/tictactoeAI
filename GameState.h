@@ -10,6 +10,9 @@
 
 #include <string>
 #include <iostream>
+
+using namespace std;
+
 class GameState{
 private:
 	int board[9];

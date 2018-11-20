@@ -9,8 +9,6 @@
 #define FILES_GAMETREE_H_
 #include "GameState.h"
 
-using namespace std;
-
 class GameTree{
 	private:
 		GameState* root;
@@ -26,6 +24,7 @@ class GameTree{
 		void insertChildren();
 		void buildTree();
 
+		friend class Game;
 };
 
 

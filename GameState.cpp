@@ -5,8 +5,6 @@
  *      Author: kelly
  */
 
-#include <string>
-#include <iostream>
 #include "GameState.h"
 
 GameState::GameState(int index, int move, int arr[9]){
@@ -39,9 +37,9 @@ void GameState::addChild(int index, int player, GameState * stem){
 }
 
 void GameState::printGameState(){
-	std::cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << std::endl;
-	std::cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << std::endl;
-	std::cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << std::endl << std::endl;
+	cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
+	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
+	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl << endl;
 }
 
 std::string GameState::getGameString(){
