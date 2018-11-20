@@ -5,7 +5,6 @@
  *      Author: kelly
  */
 
-
 #include "GameTree.h"
 
 void GameTree::getLevelString(string pf, GameState * rt){
@@ -54,6 +53,18 @@ void GameTree::insertRecursiveChildren(GameState * current, int player){
 		//if yes, insert child for the space
 		//recursively run this function on that child
 		//if no, end
+	}
+}
+
+void GameTree::giveScores(GameState * rt){
+	if (rt->numChildren() > 0){
+		for (int i = 0; i<9; i++){
+			if (rt->board[i]){
+				//giveScores(rt->board[i]);
+			}
+		}
+	} else {
+
 	}
 }
 
