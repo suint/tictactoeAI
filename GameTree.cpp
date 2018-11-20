@@ -46,7 +46,7 @@ void GameTree::printTree(){
 
 void GameTree::insertRecursiveChildren(GameState * current, int player){
 	for (int i = 0; i < 9; i++){
-		if (current->board[i] == 0 && current->isTerminalState() == -1){
+		if (current->isSpaceEmpty(i) && current->isTerminalState() == -1){
 			current->child[i] = new GameState(i, player, current->board);
 			insertRecursiveChildren(current->child[i], nextPlayer(player));
 		}

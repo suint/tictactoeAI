@@ -32,6 +32,10 @@ bool GameState::isEmpty(int index){
 	return (board[index] == 0);
 }
 
+bool GameState::isSpaceEmpty(int i){
+	return (board[i] == 0);
+}
+
 void GameState::addChild(int index, int player, GameState * stem){
 
 }

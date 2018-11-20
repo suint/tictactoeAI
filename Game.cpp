@@ -26,5 +26,23 @@ void Game::makeMove(){
 	int index;
 	cout << "Player "<< player <<"'s turn:"<<endl;
 	cin >> index;
-	cout << index << endl;
+	if(index >= 0 && index <= 8){
+		if(!pointer->isSpaceEmpty(index) ){
+			cout << "Space full" <<endl;
+			makeMove();
+		}else{ //make move, update pointer, update player, etc...
+			cout<< "Chose space " << index << endl;
+			pointer = pointer->child[index];
+			if( pointer->isTerminalState() != -1){
+				pointer->printGameState();
+				cout << "Game won" <<endl;
+			}else{
+				pointer->printGameState();
+				makeMove();
+			}
+		}
+	}else{
+		cout << "Invalid move" << endl;
+		makeMove();
+	}
 }

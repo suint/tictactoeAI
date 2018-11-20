@@ -28,6 +28,7 @@ public:
 	std::string getGameString();
 	bool boardEqual(int otherboard[9]);
 	bool isBoardFull();
+	bool isSpaceEmpty(int i);
 	int openSpaces();
 	int isTerminalState();
 	void setBoard(int index, int value);
@@ -35,6 +36,7 @@ public:
 	void setBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8); //for testing remove later
 
 	friend class GameTree;
+	friend class Game;
 };
 
 
