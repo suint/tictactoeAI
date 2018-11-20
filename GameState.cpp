@@ -95,16 +95,13 @@ int GameState::isTerminalState(){
 
 bool GameState::isOver(){
 	if (this->openSpaces() == 0 || this->findWinner() != 0){
-		std::cout << "wersgfvdfv" << std::endl;
 	} else {
-		cout << "dfgsdf" << endl;
 	}
 	return (this->openSpaces() == 0 || this->findWinner() != 0); // find if full or win found
 }
 
 //0 if no win found, -1 if player 2 won, 1 if player 1 won
 int GameState::findWinner(){
-	std::cout << "aa"<<endl;
 	if (this->findDiagWin(2) || this->findHorizWin(2) || this->findVertWin(2)){ //find if p2 won
 		return -1;
 	} else if (this->findDiagWin(1) || this->findHorizWin(1) || this->findVertWin(1)){ //find if p1

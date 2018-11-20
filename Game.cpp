@@ -36,7 +36,6 @@ void Game::makeMove(){
 		}else{ //make move, update pointer, update player, etc...
 			cout<< "Chose space " << index << endl;
 			pointer = pointer->child[index];
-			cout << "sgsdfgdfG"<< endl;
 			changePlayer();
 			if (pointer->isOver()){
 				cout <<"end found" <<endl;
@@ -50,7 +49,6 @@ void Game::makeMove(){
 					cout << "p2 wins" << endl;
 				}
 			} else {
-				cout << "no end found"<< endl;
 				pointer->printGameState();
 				makeMove();
 			}
