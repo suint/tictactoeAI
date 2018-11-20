@@ -89,7 +89,7 @@ int GameState::openSpaces(){
 
 //returns player # if player wins, 0 if tie, -1 if no winner
 int GameState::isTerminalState(){
-	for(int i = 0; i < 2; i++){
+	for(int i = 0; i < 3; i++){
 		if( (board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3]) ||
 			(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i]) ){
 				return board[i];
@@ -102,6 +102,34 @@ int GameState::isTerminalState(){
 		return 0;
 	}else
 		return -1;
+}
+
+bool GameState::isOver(){
+	return (this->numChildren() == 0 || this->whoWon() != 0); // find if leaf node or win found
+}
+
+//0 if no win found, -1 if player 2 won, 1 if player 1 won
+int GameState::findWinner(){
+	if (this->findDiagWin(2) == -1 || this->findHorizWin(2) == -1 || this->findVertWin(2) == -1){ //find if p2 won
+		return -1;
+	} else if (this->findDiagWin(1) == 1 || this->findHorizWin(1) == 1 || this->findVertWin(1) == 1){ //find if p1
+		return 1;
+	} else {
+		return 0; //tie
+	}
+}
+
+bool GameState::findDiagWin(int p){
+	return ((board[0] == p && board[4] == p && board[8] == p) || (board[2] == p && board[4] == p && board[6] == p));
+}
+
+bool GameState::findHorizWin(int p){
+	bool win = false;
+	return win;
+}
+
+bool GameState::findVertWin(int p){
+	return 230492;
 }
 
 void GameState::setBoard(int index, int value){
@@ -120,3 +148,10 @@ void GameState::setBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6,
 			board[6] = v6; board[7] = v7; board[8] = v8;
 	}
 
+int GameState::numChildren(){
+	int i = 0;
+	for (int i = 0; i<9; i++){
+		(board[i])? i++ : i = i+0;
+	}
+	return i;
+}

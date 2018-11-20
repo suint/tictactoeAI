@@ -19,6 +19,10 @@ private:
 	int value;
 	GameState **child = new GameState*[9];
 	GameState(int index, int move, int arr[9]);
+	int numChildren();
+	bool findVertWin(int p);
+	bool findHorizWin(int p);
+	bool findDiagWin(int p);
 public:
 	GameState();
 	~GameState();
@@ -30,6 +34,8 @@ public:
 	bool isBoardFull();
 	bool isSpaceEmpty(int i);
 	int openSpaces();
+	bool isOver();
+	int findWinner();
 	int isTerminalState();
 	void setBoard(int index, int value);
 	void copyBoard(int otherboard[9]);
