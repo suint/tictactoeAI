@@ -83,27 +83,15 @@ int GameState::openSpaces(){
 	for(int i = 0; i < 9; i++){
 		if(board[i] == 0){
 			r++;
-		return r;
+		}
+	}
+	return r;
 }
 
 //returns player # if player wins, 0 if tie, -1 if no winner
 int GameState::isTerminalState(){
-	for(int i = 0; i < 3; i++){
-		if( board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3] ){
-				return board[i*3];
-		}else if(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i] ){
-		if( (board[i*3] != 0 && board[i*3] == board[1+i*3] && board[1+i*3] == board[2+i*3]) ||
-			(board[i] != 0 && board[i] == board[3+i] && board[3+i] == board[6+i]) ){
-				return board[i];
-		}
-	}
-	if((board[4] != 0 && board[0] == board[4] && board[4] == board[8])||
-	   (board[4] != 0 && board[2] == board[4] && board[4] == board[6])){
-			return board[4];
-	}else if (isBoardFull()){
-		return 0;
-	}else
-		return -1;
+	return 0;
+}
 }
 
 bool GameState::isOver(){
