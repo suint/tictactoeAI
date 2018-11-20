@@ -92,10 +92,9 @@ int GameState::openSpaces(){
 int GameState::isTerminalState(){
 	return 0;
 }
-}
 
 bool GameState::isOver(){
-	return (this->numChildren() == 0 || this->whoWon() != 0); // find if leaf node or win found
+	return (this->numChildren() == 0 || this->findWinner() != 0); // find if leaf node or win found
 }
 
 //0 if no win found, -1 if player 2 won, 1 if player 1 won
@@ -130,7 +129,7 @@ bool GameState::findHorizWin(int p){
 }
 
 bool GameState::findVertWin(int p){
-	return 230492;
+
 }
 
 void GameState::setBoard(int index, int value){
