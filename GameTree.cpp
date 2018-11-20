@@ -26,24 +26,29 @@ GameTree::~GameTree(){
 
 }
 
-//only printing children of root for now, get it to work later
-void GameTree::printTree(int i){ //prints from root init with 0 lol
-	cout << "level";
-	cout << i << endl;
-
-
+//prints tree recursively now, work on formatting print later
+void GameTree::printTree(GameState * current){
+	cout << "level" << endl;
+	for(int i  = 0; i < 9; i++){
+		if(current->child[i] != nullptr){
+			current->child[i]->printGameState();
+			printTree(current->child[i]);
+		}
+	}
 }
 
-void GameTree::insertState(int index, int value){
-	root->insertState(index,value, root->board);
+void GameTree::printTree(){
+	printTree(root);
 }
+
+
 //if child of root, insert board with 100, 010, 001,.. 1 in every position
 
-void GameTree::insertRecursiveChildren(GameState * root, int player){
+void GameTree::insertRecursiveChildren(GameState * current, int player){
 	for (int i = 0; i < 9; i++){
-		if (root->isEmpty(i)){
-			root->insertState(i,player,root->board);
-			insertRecursiveChildren(root->child[i], nextPlayer(player));
+		if (current->board[i] == 0 && current->isTerminalState() == -1){
+			current->child[i] = new GameState(i, player, current->board);
+			insertRecursiveChildren(current->child[i], nextPlayer(player));
 		}
 		//write function to find if a space in the board is empty
 		//if yes, insert child for the space
@@ -52,20 +57,12 @@ void GameTree::insertRecursiveChildren(GameState * root, int player){
 	}
 }
 
+void GameTree::buildTree(){
+	this->insertRecursiveChildren(root, 1);
+}
+
 int GameTree::nextPlayer(int p){
 	return (p == 1) ? 2 : 1; //return 2 if p1 else return 1
 }
 
-//doesn't totally work yet
-void GameTree::insertChildren(){
-	for(int i = 0; i < 9; i++){
-		root->insertState(i, 1, root->board);
-	}
-	for(int i = 0; i<9; i++){
-		for(int j = 0; j < 9; j++){
-				if(root->child[i]){
-					root->child[i]->insertState(j,2,root->child[i]->board);
-				}
-		}
-	}
-}
+

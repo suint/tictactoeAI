@@ -18,11 +18,13 @@ class GameTree{
 	public:
 		GameTree();
 		~GameTree();
-		void printTree(int i);
+		void printTree(GameState * current);
+		void printTree();
 		void insertState(int index, int value);
-		void insertRecursiveChildren(GameState * root, int player);
+		void insertRecursiveChildren(GameState * current, int player);
 		int nextPlayer(int p);
 		void insertChildren();
+		void buildTree();
 
 };
 

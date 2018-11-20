@@ -15,13 +15,12 @@ private:
 	int board[9];
 	int value;
 	GameState **child = new GameState*[9];
-	GameState(int v, int arr[9]);
+	GameState(int index, int move, int arr[9]);
 public:
 	GameState();
 	~GameState();
 	bool isEmpty(int index);
 	void addChild(int index, int player, GameState * stem);
-	void insertState(int index, int value, int otherboard[9]);
 	void printGameState();
 	std::string getGameString();
 	bool boardEqual(int otherboard[9]);

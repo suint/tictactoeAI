@@ -24,8 +24,8 @@ int main(int argc, char** argv){
 	cout << "-----------------------------" <<endl;
 
 	GameTree tree = GameTree();
-	tree.insertChildren();
-	tree.printTree(0);
+	tree.buildTree();
+	tree.printTree();
 
 
 

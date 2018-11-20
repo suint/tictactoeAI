@@ -9,14 +9,13 @@
 #include <iostream>
 #include "GameState.h"
 
-GameState::GameState(int v, int arr[9]){
+GameState::GameState(int index, int move, int arr[9]){
 		for(int i = 0; i < 9; i++){
-					board[i] = arr[i];
-		}
-		for (int i = 0; i < 9; i++){
+			board[i] = arr[i];
 			child[i] = nullptr;
 		}
-		value = v;
+		board[index] = move;
+		value = 0;
 }
 
 GameState::GameState(){
@@ -32,30 +31,17 @@ GameState::~GameState(){
 }
 
 bool GameState::isEmpty(int index){
-	return !(board[index]);
+	return (board[index] == 0);
 }
 
 void GameState::addChild(int index, int player, GameState * stem){
 
 }
 
-//inserts a GameState at next null node with its board as otherboard with altered value at board[index]
-void GameState::insertState(int index, int value, int otherboard[9]){
-			for (int i = 0; i < 9; i++){
-				if(child[i] == nullptr ){//&& otherboard[index] == 0){
-					child[i] = new GameState();
-					child[i]->copyBoard(otherboard); //probably sets child board to point to otherboard? , change one change the other
-					if(otherboard[index] == 0){
-						child[i]->board[index] = value;
-					}return;
-				}
-			}
-		}
-
 void GameState::printGameState(){
 	std::cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << std::endl;
 	std::cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << std::endl;
-	std::cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << std::endl;
+	std::cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << std::endl << std::endl;
 }
 
 std::string GameState::getGameString(){
