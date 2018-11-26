@@ -26,39 +26,47 @@ void Game::startGame(){
 //between 2 players, need check if player2 then make ai move, -1 restarts game
 void Game::makeMove(){
 	int index;
-	cout << "Player "<< player <<"'s turn:"<<endl;
-	cin >> index;
-	if(index >= 0 && index <= 8){
-		if(!pointer->isSpaceEmpty(index) ){
+	if (pointer->isOver()){
+		cout <<"END GAME" <<endl;
+		pointer->printGameState();
+		int a = pointer->findWinner();
+		if (a == 0){
+			cout << "Tie" << endl;
+		} else if (a == 1){
+			cout << "Player 1 wins!!" << endl;
+		} else {
+			cout << "Player 2 wins!!" << endl;
+		}
+		cout << "Press 9 to play again or any key to exit:" <<endl;
+		cin >> index;
+		if(index == 9){
+			restartGame();
+		}
+	} else if(player == 1){
+		cout << "Player "<< player <<"'s turn:"<<endl;
+		cin >> index;
+		if(index < 0 || index > 8){
+			pointer->printGameState();
+			cout << "Invalid move" <<endl;
+			makeMove();
+		}else if(!pointer->isSpaceEmpty(index) ){
 			cout << "Space full" <<endl;
 			pointer->printGameState();
 			makeMove();
-		}else{ //make move, update pointer, update player, etc...
-			cout<< "Chose space " << index << endl;
+		}else{
 			pointer = pointer->child[index];
+			pointer->printGameState();
 			changePlayer();
-			if (pointer->isOver()){
-				cout <<"end found" <<endl;
-				pointer->printGameState();
-				int a = pointer->findWinner();
-				if (a == 0){
-					cout << "tie" << endl;
-				} else if (a == 1){
-					cout << "p1 wins" << endl;
-				} else {
-					cout << "p2 wins" << endl;
-				}
-			} else {
-				pointer->printGameState();
-				makeMove();
-			}
+			makeMove();
 		}
-	}else if(index == -1){
-		restartGame();	//for testing
-	}else{
-		cout << "Invalid move" << endl;
+	} else if(player == 2){
+		cout << "Player "<< player <<"'s turn:"<<endl;
+		aiMove();
+		pointer->printGameState();
+		changePlayer();
 		makeMove();
 	}
+
 }
 
 void Game::changePlayer(){
@@ -75,6 +83,14 @@ void Game::restartGame(){
 }
 
 void Game::aiMove(){
-
+	int movehere;
+	int minScore = 100000;
+	for(int i = 0; i<9; i++){
+			if(pointer->child[i] != nullptr && (pointer->child[i]->value < minScore) ){
+				minScore = pointer->child[i]->value;
+				movehere = i;
+			}
+	}
+	pointer = pointer->child[movehere];
 }
 

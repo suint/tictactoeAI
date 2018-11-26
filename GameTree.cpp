@@ -41,23 +41,33 @@ void GameTree::printTree(){
 }
 
 
-//if child of root, insert board with 100, 010, 001,.. 1 in every position
-
+//inserts children nodes until hits end game state, sets leaf min-max values
 void GameTree::insertRecursiveChildren(GameState * current, int player){
 	for (int i = 0; i < 9; i++){
 		if (current->isSpaceEmpty(i) && !(current->isOver())){
 			current->child[i] = new GameState(i, player, current->board);
+			current->child[i]->value = current->child[i]->findWinner();	//sets leaf nodes to min-max value
 			insertRecursiveChildren(current->child[i], nextPlayer(player));
 		}
-		//write function to find if a space in the board is empty
-		//if yes, insert child for the space
-		//recursively run this function on that child
-		//if no, end
 	}
+}
+
+
+//only setting second to last row's scores, my recursion or smth's off
+//probably need depth-first traversal instead??
+void GameTree::giveScore(GameState * current){
+	for (int i = 0; i < 9; i++){
+		if(current->child[i] != nullptr && current->child[i]->value != 0){
+			current->value += current->child[i]->value;
+		}else if(current->child[i] != nullptr){
+			giveScore(current->child[i]);
+		}
+}
 }
 
 void GameTree::buildTree(){
 	this->insertRecursiveChildren(root, 1);
+	giveScore(root);
 }
 
 int GameTree::nextPlayer(int p){

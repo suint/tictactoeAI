@@ -43,7 +43,9 @@ void GameState::addChild(int index, int player, GameState * stem){
 void GameState::printGameState(){
 	cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
-	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl << endl;
+	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl;
+
+	cout << "Score: " << value <<endl<< endl; //test
 }
 
 std::string GameState::getGameString(){
@@ -132,14 +134,14 @@ bool GameState::findHorizWin(int p){
 	for (int i = 0; i<3; i++){
 		win = true;
 		for (int j = 0; j<3; j++){
-			if (board[i+j] != p){
+			if (board[(i*3)+j] != p){
 				win = false;
 			}
 		}
-		if (win){
-			return win;
-		}
-	}
+			if (win){
+					return win;
+				}
+			}
 	return false;
 }
 
