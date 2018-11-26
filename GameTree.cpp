@@ -56,18 +56,6 @@ void GameTree::insertRecursiveChildren(GameState * current, int player){
 	}
 }
 
-void GameTree::giveScores(GameState * rt){
-	if (rt->numChildren() > 0){
-		for (int i = 0; i<9; i++){
-			if (rt->board[i]){
-				//giveScores(rt->board[i]);
-			}
-		}
-	} else {
-
-	}
-}
-
 void GameTree::buildTree(){
 	this->insertRecursiveChildren(root, 1);
 }

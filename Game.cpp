@@ -75,8 +75,6 @@ void Game::restartGame(){
 }
 
 void Game::aiMove(){
-	//go through children of current pointer
-	//find index of one w/ largest min-max value
-	//set pointer to that child
+
 }
 

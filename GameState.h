@@ -35,12 +35,12 @@ public:
 	bool isSpaceEmpty(int i);
 	int openSpaces();
 	bool isOver();
+	int giveScore();
 	int findWinner();
 	int isTerminalState();
 	void setBoard(int index, int value);
 	void copyBoard(int otherboard[9]);
 	void setBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8); //for testing remove later
-
 	friend class GameTree;
 	friend class Game;
 };

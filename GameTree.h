@@ -20,11 +20,9 @@ class GameTree{
 		void printTree();
 		void insertState(int index, int value);
 		void insertRecursiveChildren(GameState * current, int player);
-		void giveScores(GameState * rt);
 		int nextPlayer(int p);
 		void insertChildren();
 		void buildTree();
-
 		friend class Game;
 };
 

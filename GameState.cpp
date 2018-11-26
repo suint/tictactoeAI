@@ -78,6 +78,18 @@ bool GameState::isBoardFull(){
 	} return true;
 }
 
+int GameState::giveScore(){
+	if (this->numChildren() == 0){
+		return this->findWinner();
+	} else {
+		int score = this->findWinner();
+		for (int i = 0; i < this->numChildren(); i++){
+			score += child[i]->giveScore();
+		}
+		return score;
+	}
+}
+
 int GameState::openSpaces(){
 	int r = 0;
 	for(int i = 0; i < 9; i++){
