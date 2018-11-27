@@ -22,6 +22,7 @@ GameTree::GameTree(){
 	root = new GameState();
 }
 GameTree::~GameTree(){
+	deleteNodes(root);
 }
 
 void GameTree::deleteNodes(GameState * root){
