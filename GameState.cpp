@@ -45,7 +45,7 @@ void GameState::printGameState(){
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
 	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl;
 
-	//cout << "Score: " << value <<endl<< endl; //test
+	cout << "Score: " << this->giveScore() <<endl<< endl; //test
 }
 
 std::string GameState::getGameString(){
@@ -81,7 +81,7 @@ bool GameState::isBoardFull(){
 }
 
 int GameState::giveScore(){
-	if (this->numChildren() == 0){
+	if (this->isOver()){
 		return this->findWinner();
 	} else {
 		int score = this->findWinner();
