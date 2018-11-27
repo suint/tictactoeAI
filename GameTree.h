@@ -16,6 +16,7 @@ class GameTree{
 	public:
 		GameTree();
 		~GameTree();
+		void deleteNodes(GameState * root);
 		void printTree(GameState * current);
 		void printTree();
 		void insertState(int index, int value);

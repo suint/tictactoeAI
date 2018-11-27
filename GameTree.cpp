@@ -22,7 +22,18 @@ GameTree::GameTree(){
 	root = new GameState();
 }
 GameTree::~GameTree(){
+}
 
+void GameTree::deleteNodes(GameState * root){
+	if (root->isOver()){
+		for (int i = 0; i < 9; i++){
+			if (root->child[i]){
+				deleteNodes(root->child[i]);
+			}
+		}
+	} else {
+		delete root;
+	}
 }
 
 //maybe works now??, work on formatting print later

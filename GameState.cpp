@@ -25,7 +25,6 @@ GameState::GameState(){
 }
 
 GameState::~GameState(){
-	//delete nodes in children recursively
 }
 
 bool GameState::isEmpty(int index){
