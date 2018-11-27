@@ -86,8 +86,8 @@ void Game::aiMove(){
 	int movehere;
 	int minScore = 100000;
 	for(int i = 0; i<9; i++){
-			if(pointer->child[i] != nullptr && (pointer->child[i]->value < minScore) ){
-				minScore = pointer->child[i]->value;
+			if(pointer->child[i] && (pointer->child[i]->giveScore() < minScore) ){
+				minScore = pointer->child[i]->giveScore();
 				movehere = i;
 			}
 	}

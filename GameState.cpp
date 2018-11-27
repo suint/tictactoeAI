@@ -13,7 +13,7 @@ GameState::GameState(int index, int move, int arr[9]){
 			child[i] = nullptr;
 		}
 		board[index] = move;
-		value = 0;
+		//value = 0;
 }
 
 GameState::GameState(){
@@ -21,7 +21,7 @@ GameState::GameState(){
 		board[i] = 0;
 		child[i] = nullptr;
 	}
-	value = 0;
+	//value = 0;
 }
 
 GameState::~GameState(){
@@ -45,7 +45,7 @@ void GameState::printGameState(){
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
 	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl;
 
-	cout << "Score: " << value <<endl<< endl; //test
+	//cout << "Score: " << value <<endl<< endl; //test
 }
 
 std::string GameState::getGameString(){
@@ -85,8 +85,10 @@ int GameState::giveScore(){
 		return this->findWinner();
 	} else {
 		int score = this->findWinner();
-		for (int i = 0; i < this->numChildren(); i++){
-			score += child[i]->giveScore();
+		for (int i = 0; i < 9; i++){
+			if (child[i]){
+				score += child[i]->giveScore();
+			}
 		}
 		return score;
 	}

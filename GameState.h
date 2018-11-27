@@ -16,7 +16,6 @@ using namespace std;
 class GameState{
 private:
 	int board[9];
-	int value;
 	GameState **child = new GameState*[9];
 	GameState(int index, int move, int arr[9]);
 	int numChildren();

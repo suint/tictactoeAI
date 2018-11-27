@@ -46,7 +46,7 @@ void GameTree::insertRecursiveChildren(GameState * current, int player){
 	for (int i = 0; i < 9; i++){
 		if (current->isSpaceEmpty(i) && !(current->isOver())){
 			current->child[i] = new GameState(i, player, current->board);
-			current->child[i]->value = current->child[i]->findWinner();	//sets leaf nodes to min-max value
+			//current->child[i]->value = current->child[i]->findWinner();	//sets leaf nodes to min-max value
 			insertRecursiveChildren(current->child[i], nextPlayer(player));
 		}
 	}
@@ -55,7 +55,7 @@ void GameTree::insertRecursiveChildren(GameState * current, int player){
 
 //only setting second to last row's scores, my recursion or smth's off
 //probably need depth-first traversal instead??
-void GameTree::giveScore(GameState * current){
+/*void GameTree::giveScore(GameState * current){
 	for (int i = 0; i < 9; i++){
 		if(current->child[i] != nullptr && current->child[i]->value != 0){
 			current->value += current->child[i]->value;
@@ -64,10 +64,9 @@ void GameTree::giveScore(GameState * current){
 		}
 }
 }
-
+*/
 void GameTree::buildTree(){
 	this->insertRecursiveChildren(root, 1);
-	giveScore(root);
 }
 
 int GameTree::nextPlayer(int p){
