@@ -39,7 +39,7 @@ void GameState::addChild(int index, int player, GameState * stem){
 
 }
 
-void GameState::printGameState(){
+void GameState::printGameState(){ //print game state one cell at a time
 	cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
 	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl;
@@ -47,7 +47,7 @@ void GameState::printGameState(){
 	cout << "Score: " << this->giveScore() <<endl<< endl; //test
 }
 
-std::string GameState::getGameString(){
+std::string GameState::getGameString(){ //print game state iteratively
 	std::string gm = "";
 	for (int i = 0; i<3; i++){
 		gm = gm + "|";
@@ -59,18 +59,6 @@ std::string GameState::getGameString(){
 	return gm;
 }
 
-//maybe for comparing moves / boards? idkkk //why?
-bool GameState::boardEqual(int otherboard[9]){
-	bool flag = true;
-	int i = 0;
-	while(i < 9 && flag == true){
-		if(board[i] != otherboard[i]){
-			flag = false;
-		}
-	}
-	return flag;
-}
-
 bool GameState::isBoardFull(){
 	for(int i = 0; i < 9; i++){
 		if(board[i] == 0){
@@ -79,7 +67,7 @@ bool GameState::isBoardFull(){
 	} return true;
 }
 
-int GameState::giveScore(){
+int GameState::giveScore(){ //returns min/max value
 	if (this->isOver()){
 		return this->findWinner();
 	} else {
@@ -93,7 +81,7 @@ int GameState::giveScore(){
 	}
 }
 
-int GameState::openSpaces(){
+int GameState::openSpaces(){ //returns number of open spaces available
 	int r = 0;
 	for(int i = 0; i < 9; i++){
 		if(board[i] == 0){
@@ -108,7 +96,7 @@ int GameState::isTerminalState(){
 	return 0;
 }
 
-bool GameState::isOver(){
+bool GameState::isOver(){ //detects all game endings
 	if (this->openSpaces() == 0 || this->findWinner() != 0){
 	} else {
 	}
@@ -162,10 +150,7 @@ bool GameState::findVertWin(int p){
 	return false;
 }
 
-void GameState::setBoard(int index, int value){
-	board[index] = value;
-}
-void GameState::copyBoard(int otherboard[9]){
+void GameState::copyBoard(int otherboard[9]){ //make hard copy of board
 	for(int i = 0; i < 9; i++){
 		board[i] = otherboard[i];
 	}
@@ -178,7 +163,7 @@ void GameState::setBoard(int v0, int v1, int v2, int v3, int v4, int v5, int v6,
 			board[6] = v6; board[7] = v7; board[8] = v8;
 	}
 
-int GameState::numChildren(){
+int GameState::numChildren(){ //find number of children
 	int i = 0;
 	for (int i = 0; i<9; i++){
 		(board[i])? i++ : i = i+0;

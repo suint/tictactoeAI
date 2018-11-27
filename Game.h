@@ -15,7 +15,6 @@ private:
 	GameTree tree;
 	GameState* pointer;
 	int player;
-
 public:
 	Game();
 	~Game();

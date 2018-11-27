@@ -16,6 +16,7 @@ using namespace std;
 
 int main(int argc, char** argv){
 
+	/****test code****
 	GameState state = GameState();
 	state.printGameState();
 	state.setBoard(0,2,0,1,2,2,1,2,2);
@@ -26,7 +27,7 @@ int main(int argc, char** argv){
 
 	GameTree tree = GameTree();
 	tree.buildTree();
-	//tree.printTree();
+	//tree.printTree(); */
 
 	Game game = Game();
 	game.startGame();
