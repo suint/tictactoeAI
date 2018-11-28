@@ -17,6 +17,7 @@ Game::Game(){
 	player = 1;
 }
 Game::~Game(){
+
 }
 
 void Game::startGame(){

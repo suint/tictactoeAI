@@ -35,28 +35,12 @@ bool GameState::isSpaceEmpty(int i){
 	return (board[i] == 0);
 }
 
-void GameState::addChild(int index, int player, GameState * stem){
-
-}
-
 void GameState::printGameState(){ //print game state one cell at a time
 	cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;
 	cout << "|" << board[6] << "|" << board[7] << "|" << board[8] << "|" << endl;
 
 	cout << "Score: " << this->giveScore() <<endl<< endl; //test
-}
-
-std::string GameState::getGameString(){ //print game state iteratively
-	std::string gm = "";
-	for (int i = 0; i<3; i++){
-		gm = gm + "|";
-		for (int j = 0; j<3; j++){
-			gm = gm + std::to_string(board[(i*3)+j]);
-		}
-		gm = gm + "\n";
-	}
-	return gm;
 }
 
 bool GameState::isBoardFull(){
@@ -89,11 +73,6 @@ int GameState::openSpaces(){ //returns number of open spaces available
 		}
 	}
 	return r;
-}
-
-//returns player # if player wins, 0 if tie, -1 if no winner
-int GameState::isTerminalState(){
-	return 0;
 }
 
 bool GameState::isOver(){ //detects all game endings

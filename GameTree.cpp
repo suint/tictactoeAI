@@ -38,7 +38,7 @@ void GameTree::deleteNodes(GameState * root){ //recursively delete nodes in tree
 	}
 }
 
-//maybe works now??, work on formatting print later
+//used for testing
 void GameTree::printTree(GameState * current){
 	cout << "level" << endl;
 	current->printGameState();
