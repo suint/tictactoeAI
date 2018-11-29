@@ -17,7 +17,7 @@ Game::Game(){
 	player = 1;
 }
 Game::~Game(){
-
+	delete pointer;
 }
 
 void Game::startGame(){
@@ -90,7 +90,6 @@ void Game::aiMove(){
 	int minScore = 100000;
 	for(int i = 0; i < 9; i++){ //minimizes score to win
 		if(pointer->child[i] && (pointer->child[i]->giveScore() < minScore) ){ //finds child with lowest score
-			cout << minScore<<endl;
 			minScore = pointer->child[i]->giveScore();
 			movehere = i;
 		}

@@ -13,7 +13,6 @@ GameState::GameState(int index, int move, int arr[9]){
 			child[i] = nullptr;
 		}
 		board[index] = move;
-		//value = 0;
 }
 
 GameState::GameState(){
@@ -21,7 +20,6 @@ GameState::GameState(){
 		board[i] = 0;
 		child[i] = nullptr;
 	}
-	//value = 0;
 }
 
 GameState::~GameState(){
@@ -35,6 +33,17 @@ bool GameState::isSpaceEmpty(int i){
 	return (board[i] == 0);
 }
 
+//test if board is equal to state board (for testing)
+bool GameState::boardEqual(int otherboard[9]){
+	bool flag = true;
+	int i = 0;
+	while(i < 9 && flag == true){
+		if(board[i] != otherboard[i]){
+			flag = false;
+		}
+	}
+	return flag;
+}
 void GameState::printGameState(){ //print game state one cell at a time
 	cout << "|" << board[0] << "|" << board[1] << "|" << board[2] << "|" << endl;
 	cout << "|" << board[3] << "|" << board[4] << "|" << board[5] << "|" << endl;

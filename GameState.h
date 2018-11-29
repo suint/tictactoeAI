@@ -22,6 +22,7 @@ private:
 	bool findVertWin(int p);
 	bool findHorizWin(int p);
 	bool findDiagWin(int p);
+	bool boardEqual(int otherboard[9]);
 public:
 	GameState();
 	~GameState();
